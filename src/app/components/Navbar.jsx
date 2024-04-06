@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "../../lib/supabase/server";
 import LogOut from "./LogOut";
 const navbar = async () => {
   const supabase = await createClient();

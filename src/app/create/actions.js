@@ -1,6 +1,6 @@
 "use server";
 
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "../../lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
 export async function createPost(title, location, description) {
@@ -30,4 +30,10 @@ export async function readPost() {
     })
   );
   return postComponentData;
+}
+
+export async function deletePost(id) {
+  const supabase = await createClient();
+  await supabase.from("posts").delete().eq("id", id);
+  revalidatePath("/");
 }
