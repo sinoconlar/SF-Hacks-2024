@@ -37,6 +37,7 @@ export async function deletePost(id) {
   const supabase = await createClient();
   await supabase.from("posts").delete().eq("id", id);
   revalidatePath("/");
+  redirect("/");
 }
 
 export async function readSinglePost(id) {

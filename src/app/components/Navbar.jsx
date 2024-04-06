@@ -14,7 +14,7 @@ const navbar = async () => {
       </Link>
       {user != null && (
         <>
-          <Link href={`/user/${user.id}`}>Your profile</Link>
+          <Link href={`/profile`}>Your profile</Link>
           <Link href={`/create`}>Create new post</Link>
         </>
       )}
