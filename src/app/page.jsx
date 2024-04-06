@@ -1,9 +1,12 @@
+
+import GoogleMaps from "./components/GoogleMaps";
 import { readPost } from "../lib/actions";
 import PostComponent from "./components/PostComponent";
 
 export default async function Home() {
   const data = await readPost();
   return (
+ <GoogleMaps />
     <div className="min-h-screen flex flex-col gap-5 items-center py-14">
       {data?.map((post, index) => {
         return (
