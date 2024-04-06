@@ -31,3 +31,9 @@ export async function readPost() {
   );
   return postComponentData;
 }
+
+export async function deletePost(id) {
+  const supabase = await createClient();
+  await supabase.from("posts").delete().eq("id", id);
+  revalidatePath("/");
+}
