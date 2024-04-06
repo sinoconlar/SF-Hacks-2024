@@ -58,3 +58,17 @@ export async function readSinglePost(id) {
   const username = await userData[0].username;
   return { ...postData, userData };
 }
+
+export async function getPostsFromUser(id) {
+  const supabase = await createClient();
+  const { data: userPosts, error } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("author", id);
+
+  if (error) {
+    redirect("/error");
+  }
+
+  return userPosts;
+}
