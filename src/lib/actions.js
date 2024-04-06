@@ -1,7 +1,8 @@
 "use server";
 
-import { createClient } from "../../lib/supabase/server";
+import { createClient } from "./supabase/server";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 export async function createPost(title, location, description) {
   const supabase = await createClient();
@@ -36,4 +37,23 @@ export async function deletePost(id) {
   const supabase = await createClient();
   await supabase.from("posts").delete().eq("id", id);
   revalidatePath("/");
+}
+
+export async function readSinglePost(id) {
+  const supabase = await createClient();
+  const { data: postData, error } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("id", id);
+
+  if (error || postData.length == 0) {
+    redirect("/error");
+  }
+
+  const { data: userData } = await supabase
+    .from("profiles")
+    .select("username", "id")
+    .eq("id", postData[0].author);
+  const username = await userData[0].username;
+  return { ...postData, userData };
 }
