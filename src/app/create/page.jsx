@@ -1,5 +1,5 @@
 import React from "react";
-import { createPost } from "./actions";
+import { createPost } from "../../lib/actions";
 import { redirect } from "next/navigation";
 
 const PostForm = () => {
