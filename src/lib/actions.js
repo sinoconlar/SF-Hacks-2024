@@ -4,6 +4,14 @@ import { createClient } from "./supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+export async function getUser() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user;
+}
+
 export async function createPost(title, location, description) {
   const supabase = await createClient();
   const result = await supabase
@@ -71,8 +79,8 @@ export async function readSinglePost(id) {
     .from("profiles")
     .select("username", "id")
     .eq("id", postData[0].author);
-  const username = await userData[0].username;
-  return { ...postData, userData };
+  const username = userData[0].username;
+  return { ...postData, username };
 }
 
 export async function getPostsFromUser(id) {
@@ -88,4 +96,13 @@ export async function getPostsFromUser(id) {
   }
 
   return userPosts;
+}
+
+export async function logOut() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user) await supabase.auth.signOut();
+  redirect("/");
 }

@@ -1,10 +1,20 @@
 "use client";
 import React from "react";
-import NavigatePageButton from "../components/NavigatePageButton";
-import EditButton from "../components/EditButton";
+import NavigatePageButton from "./NavigatePageButton";
+import EditButton from "./EditButton";
 import { deletePost } from "../../lib/actions";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Textarea } from "@/components/ui/textarea";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 const PostComponent = ({
   id,
   title,
@@ -21,65 +31,79 @@ const PostComponent = ({
 
   const deleteFunc = deletePost.bind(null, id);
   return showFullPage ? (
-    <div className="flex flex-col p-4 gap-3 text-white">
-      <input
-        type="text"
+    <div className="flex flex-col px-16 md:px-28 lg:px-56 py-16 gap-3 ">
+      <textarea
         name="title"
         id="title"
-        className="text-lg font-bold bg-transparent border-cbe"
+        cols="30"
+        rows="2"
+        className="text-lg font-bold bg-transparent resize-none"
         value={postTitle}
         onChange={(e) => {
           setPostTitle(e.currentTarget.value);
         }}
         readOnly={!isEditing}
-      />
-      <p className="text-sm italic">{username}</p>
+      ></textarea>
+      <p className="text-md italic">{username}</p>
       <input
         type="text"
         name="location"
         id="location"
-        className="text-lg font-bold bg-transparent border-cbe"
+        className="text-md bg-transparent"
         value={postLocation}
         onChange={(e) => {
           setPostLocation(e.currentTarget.value);
         }}
         readOnly={!isEditing}
       />
-      <input
-        type="text"
+      <textarea
         name="postDescription"
         id="postDescription"
-        className="text-lg font-bold bg-transparent border-cbe"
+        cols="30"
+        rows="10"
+        className="py-6 text-sm bg-transparent"
         value={postDescription}
         onChange={(e) => {
           setPostDescription(e.currentTarget.value);
         }}
         readOnly={!isEditing}
-      />
-      <form action={deleteFunc}>
-        <button>delete</button>
-      </form>
-      <EditButton
-        postID={id}
-        title={postTitle}
-        description={postDescription}
-        location={postLocation}
-        author={author}
-        isEditing={isEditing}
-        setIsEditing={setIsEditing}
-      ></EditButton>
+      ></textarea>
+      <div className="flex self-end gap-4 md:gap-8 my-9">
+        <form action={deleteFunc}>
+          <Button variant="destructive">delete</Button>
+        </form>
+        <EditButton
+          postID={id}
+          title={postTitle}
+          description={postDescription}
+          location={postLocation}
+          author={author}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+        ></EditButton>
+      </div>
     </div>
   ) : (
-    <div className="flex flex-col p-4 gap-3 text-white">
-      <h3 className="text-lg font-bold">{title}</h3>
-      <p className="text-sm italic">{username}</p>
-      <p className="text-sm">{location}</p>
-      <p className="text-sm">{description}</p>
-      <form action={deleteFunc}>
-        <button>delete</button>
-      </form>
+    <Card
+      className="flex flex-col p-4 gap-3 max-w-md md:max-w-lg npx shadcn-ui@latest add navigation-menu rounded-md
+    truncate"
+    >
+      <CardHeader>
+        <CardTitle className="text-md font-bold my-2 truncate">
+          {title}
+        </CardTitle>
+        <CardDescription className="text-sm italic truncate">
+          {username}
+        </CardDescription>
+        <CardDescription className="text-sm truncate">
+          {location}
+        </CardDescription>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm truncate">{description}</p>
+      </CardContent>
       <NavigatePageButton id={id}></NavigatePageButton>
-    </div>
+    </Card>
   );
 };
 

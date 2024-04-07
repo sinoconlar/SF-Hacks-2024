@@ -7,7 +7,8 @@ export default async function Home() {
   return (
     <div>
       <GoogleMaps />
-      <div className="min-h-screen flex flex-col gap-5 items-center py-14">
+      <div className="min-h-screen flex flex-col gap-8 items-center py-14">
+        <h2>Featured Businesses</h2>
         {data?.map((post, index) => {
           return (
             <PostComponent

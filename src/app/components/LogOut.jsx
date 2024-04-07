@@ -1,20 +1,13 @@
-import { createClient } from "../../lib/supabase/server";
-import { redirect } from "next/navigation";
+import { logOut } from "@/src/lib/actions";
 import React from "react";
 
 const LogOut = () => {
-  const logOut = async () => {
-    "use server";
-    const supabase = await createClient();
-    const {
-      data: { user },
-    } = await supabase.auth.getUser();
-    if (user) await supabase.auth.signOut();
-    redirect("/");
+  const handleLogOut = async () => {
+    await logOut();
   };
 
   return (
-    <form action={logOut}>
+    <form action={handleLogOut}>
       <button>Log out</button>
     </form>
   );
