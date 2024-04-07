@@ -49,11 +49,9 @@ const navbar = ({ user }) => {
           </NavigationMenuItem>
         ) : (
           <NavigationMenuItem>
-            <Link href="/">
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                <LogOut />
-              </NavigationMenuLink>
-            </Link>
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <LogOut />
+            </NavigationMenuLink>
           </NavigationMenuItem>
         )}
       </NavigationMenuList>
