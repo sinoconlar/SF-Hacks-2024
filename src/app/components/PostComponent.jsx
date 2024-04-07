@@ -5,7 +5,6 @@ import EditButton from "./EditButton";
 import { deletePost } from "../../lib/actions";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-import { Textarea } from "@/components/ui/textarea";
 
 import {
   Card,

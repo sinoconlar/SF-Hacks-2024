@@ -2,9 +2,9 @@
 import React from "react";
 import { createPost } from "../../lib/actions";
 import { useRouter } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import { Button } from "../../../@/components/ui/button";
 import { useForm } from "react-hook-form";
-import { Textarea } from "@/components/ui/textarea";
+import { Textarea } from "../../../@/components/ui/textarea";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -15,8 +15,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "../../../@/components/ui/form";
+import { Input } from "../../../@/components/ui/input";
 
 const formSchema = z.object({
   title: z.string().min(8).max(100),

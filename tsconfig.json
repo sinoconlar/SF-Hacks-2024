@@ -3,16 +3,16 @@
     "lib": ["dom", "dom.iterable", "esnext"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["/*"]
     },
     "allowJs": true,
     "skipLibCheck": true,
-    "strict": true,
+    "strict": false,
     "noEmit": true,
     "incremental": true,
     "esModuleInterop": true,
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
