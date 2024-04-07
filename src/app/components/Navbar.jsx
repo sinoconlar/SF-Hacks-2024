@@ -12,7 +12,7 @@ import {
 
 const navbar = ({ user }) => {
   return (
-    <NavigationMenu className="flex justify-start py-2 px-4">
+    <NavigationMenu className="flex flex-grow-0 justify-start py-2 px-4 shadow-sm">
       <NavigationMenuList className="flex gap-4">
         <NavigationMenuItem>
           <Link href="/">

@@ -46,11 +46,11 @@ const PostForm = () => {
   };
 
   return (
-    <div className="flex flex-1 flex-col px-4 py-2 gap-7 items-center justify-center">
+    <div className="flex flex-1 flex-col items-center justify-center ">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-6"
+          className="flex flex-col gap-5"
         >
           <FormField
             control={form.control}

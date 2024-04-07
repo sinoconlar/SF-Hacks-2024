@@ -77,15 +77,20 @@ const PostComponent = ({
       ></EditButton>
     </div>
   ) : (
-    <Card className="flex flex-col p-4 gap-3 max-w-md md:w-[448px] truncate">
+    <Card
+      className="flex flex-col p-4 gap-3 max-w-md md:max-w-lg npx shadcn-ui@latest add navigation-menu rounded-md
+    truncate"
+    >
       <CardHeader>
-        <CardTitle className="text-lg font-bold my-2">{title}</CardTitle>
-        <div className="flex flex-col gap-1">
-          <CardDescription className="text-sm italic">
-            {username}
-          </CardDescription>
-          <CardDescription className="text-sm">{location}</CardDescription>
-        </div>
+        <CardTitle className="text-md font-bold my-2 truncate">
+          {title}
+        </CardTitle>
+        <CardDescription className="text-sm italic truncate">
+          {username}
+        </CardDescription>
+        <CardDescription className="text-sm truncate">
+          {location}
+        </CardDescription>
       </CardHeader>
       <CardContent>
         <p className="text-sm truncate">{description}</p>

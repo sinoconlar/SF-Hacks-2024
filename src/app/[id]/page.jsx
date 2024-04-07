@@ -3,7 +3,8 @@ import PostComponent from "../components/PostComponent";
 import { readSinglePost } from "../../lib/actions";
 
 const page = async ({ params }) => {
-  const pageData = (await readSinglePost(params.id))[0];
+  const fetchedData = await readSinglePost(params.id);
+  const pageData = { ...fetchedData[0], username: fetchedData.username };
   return (
     <PostComponent
       id={pageData.id}

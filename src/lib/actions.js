@@ -79,8 +79,8 @@ export async function readSinglePost(id) {
     .from("profiles")
     .select("username", "id")
     .eq("id", postData[0].author);
-  const username = await userData[0].username;
-  return { ...postData, userData };
+  const username = userData[0].username;
+  return { ...postData, username };
 }
 
 export async function getPostsFromUser(id) {
