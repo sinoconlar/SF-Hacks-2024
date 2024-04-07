@@ -1,4 +1,5 @@
 import { updatePost } from "../../lib/actions";
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 const EditButton = ({
@@ -19,7 +20,11 @@ const EditButton = ({
     }
   };
 
-  return <button onClick={handleClick}>Edit post</button>;
+  return (
+    <Button onClick={handleClick}>
+      {isEditing ? "Save edits" : "Edit post"}
+    </Button>
+  );
 };
 
 export default EditButton;

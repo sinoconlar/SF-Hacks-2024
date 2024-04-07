@@ -3,7 +3,10 @@ import React from "react";
 import NavigatePageButton from "./NavigatePageButton";
 import EditButton from "./EditButton";
 import { deletePost } from "../../lib/actions";
+import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { Textarea } from "@/components/ui/textarea";
+
 import {
   Card,
   CardContent,
@@ -28,18 +31,19 @@ const PostComponent = ({
 
   const deleteFunc = deletePost.bind(null, id);
   return showFullPage ? (
-    <div className="flex flex-col p-4 gap-3 ">
-      <input
-        type="text"
+    <div className="flex flex-col px-16 md:px-28 lg:px-56 py-16 gap-3 ">
+      <textarea
         name="title"
         id="title"
-        className="text-lg font-bold bg-transparent"
+        cols="30"
+        rows="2"
+        className="text-lg font-bold bg-transparent resize-none"
         value={postTitle}
         onChange={(e) => {
           setPostTitle(e.currentTarget.value);
         }}
         readOnly={!isEditing}
-      />
+      ></textarea>
       <p className="text-md italic">{username}</p>
       <input
         type="text"
@@ -52,29 +56,32 @@ const PostComponent = ({
         }}
         readOnly={!isEditing}
       />
-      <input
-        type="text"
+      <textarea
         name="postDescription"
         id="postDescription"
-        className="text-md bg-transparent"
+        cols="30"
+        rows="10"
+        className="py-6 text-sm bg-transparent"
         value={postDescription}
         onChange={(e) => {
           setPostDescription(e.currentTarget.value);
         }}
         readOnly={!isEditing}
-      />
-      <form action={deleteFunc}>
-        <button>delete</button>
-      </form>
-      <EditButton
-        postID={id}
-        title={postTitle}
-        description={postDescription}
-        location={postLocation}
-        author={author}
-        isEditing={isEditing}
-        setIsEditing={setIsEditing}
-      ></EditButton>
+      ></textarea>
+      <div className="flex self-end gap-4 md:gap-8 my-9">
+        <form action={deleteFunc}>
+          <Button variant="destructive">delete</Button>
+        </form>
+        <EditButton
+          postID={id}
+          title={postTitle}
+          description={postDescription}
+          location={postLocation}
+          author={author}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+        ></EditButton>
+      </div>
     </div>
   ) : (
     <Card
