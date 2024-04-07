@@ -11,6 +11,7 @@ const page = async ({ params }) => {
       username={pageData.username}
       location={pageData.location}
       description={pageData.description}
+      author={pageData.author}
     ></PostComponent>
   );
 };

@@ -17,6 +17,7 @@ export default async function Home() {
               username={post.username}
               location={post.location}
               description={post.description}
+              author={post.author}
               showFullPage={false}
             ></PostComponent>
           );

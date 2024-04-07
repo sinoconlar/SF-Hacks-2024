@@ -31,6 +31,7 @@ const profile = async () => {
                 username={post.username}
                 location={post.location}
                 description={post.description}
+                author={post.author}
                 showFullPage={false}
               ></PostComponent>
             );

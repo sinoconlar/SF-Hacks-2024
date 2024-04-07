@@ -40,6 +40,22 @@ export async function deletePost(id) {
   redirect("/");
 }
 
+export async function updatePost(postID, author, title, location, description) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user || user.id != author) {
+    return;
+  }
+
+  await supabase
+    .from("posts")
+    .update({ title, location, description })
+    .eq("id", postID);
+  revalidatePath("/profile");
+}
+
 export async function readSinglePost(id) {
   const supabase = await createClient();
   const { data: postData, error } = await supabase
@@ -64,7 +80,8 @@ export async function getPostsFromUser(id) {
   const { data: userPosts, error } = await supabase
     .from("posts")
     .select("*")
-    .eq("author", id);
+    .eq("author", id)
+    .order("created_at", { ascending: false });
 
   if (error) {
     redirect("/error");
