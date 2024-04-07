@@ -19,9 +19,9 @@ import {
 import { Input } from "@/components/ui/input";
 
 const formSchema = z.object({
-  title: z.string().min(10).max(100),
-  location: z.string().min(10).max(100),
-  description: z.string().min(100),
+  title: z.string().min(8).max(100),
+  location: z.string().min(8).max(100),
+  description: z.string().min(50),
 });
 
 const PostForm = () => {
