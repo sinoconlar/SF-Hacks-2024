@@ -1,10 +1,17 @@
 "use client";
 import React from "react";
-import NavigatePageButton from "../components/NavigatePageButton";
-import EditButton from "../components/EditButton";
+import NavigatePageButton from "./NavigatePageButton";
+import EditButton from "./EditButton";
 import { deletePost } from "../../lib/actions";
 import { useState } from "react";
-
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 const PostComponent = ({
   id,
   title,
@@ -21,24 +28,24 @@ const PostComponent = ({
 
   const deleteFunc = deletePost.bind(null, id);
   return showFullPage ? (
-    <div className="flex flex-col p-4 gap-3 text-white">
+    <div className="flex flex-col p-4 gap-3 ">
       <input
         type="text"
         name="title"
         id="title"
-        className="text-lg font-bold bg-transparent border-cbe"
+        className="text-lg font-bold bg-transparent"
         value={postTitle}
         onChange={(e) => {
           setPostTitle(e.currentTarget.value);
         }}
         readOnly={!isEditing}
       />
-      <p className="text-sm italic">{username}</p>
+      <p className="text-md italic">{username}</p>
       <input
         type="text"
         name="location"
         id="location"
-        className="text-lg font-bold bg-transparent border-cbe"
+        className="text-md bg-transparent"
         value={postLocation}
         onChange={(e) => {
           setPostLocation(e.currentTarget.value);
@@ -49,7 +56,7 @@ const PostComponent = ({
         type="text"
         name="postDescription"
         id="postDescription"
-        className="text-lg font-bold bg-transparent border-cbe"
+        className="text-md bg-transparent"
         value={postDescription}
         onChange={(e) => {
           setPostDescription(e.currentTarget.value);
@@ -70,16 +77,21 @@ const PostComponent = ({
       ></EditButton>
     </div>
   ) : (
-    <div className="flex flex-col p-4 gap-3 text-white">
-      <h3 className="text-lg font-bold">{title}</h3>
-      <p className="text-sm italic">{username}</p>
-      <p className="text-sm">{location}</p>
-      <p className="text-sm">{description}</p>
-      <form action={deleteFunc}>
-        <button>delete</button>
-      </form>
+    <Card className="flex flex-col p-4 gap-3 max-w-md md:w-[448px] truncate">
+      <CardHeader>
+        <CardTitle className="text-lg font-bold my-2">{title}</CardTitle>
+        <div className="flex flex-col gap-1">
+          <CardDescription className="text-sm italic">
+            {username}
+          </CardDescription>
+          <CardDescription className="text-sm">{location}</CardDescription>
+        </div>
+      </CardHeader>
+      <CardContent>
+        <p className="text-sm truncate">{description}</p>
+      </CardContent>
       <NavigatePageButton id={id}></NavigatePageButton>
-    </div>
+    </Card>
   );
 };
 

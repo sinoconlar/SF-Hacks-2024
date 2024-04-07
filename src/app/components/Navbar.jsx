@@ -1,25 +1,63 @@
+"use client";
 import React from "react";
 import Link from "next/link";
-import { createClient } from "../../lib/supabase/server";
 import LogOut from "./LogOut";
-const navbar = async () => {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+import {
+  NavigationMenu,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+
+const navbar = ({ user }) => {
   return (
-    <div className="flex p-5 gap-5 bg-slate-400">
-      <Link href="/">
-        <h1>SFHacks24</h1>
-      </Link>
-      {user != null && (
-        <>
-          <Link href={`/profile`}>Your profile</Link>
-          <Link href={`/create`}>Create new post</Link>
-        </>
-      )}
-      {user == null ? <Link href={`/login/`}>Log In</Link> : <LogOut />}
-    </div>
+    <NavigationMenu className="flex justify-start py-2 px-4">
+      <NavigationMenuList className="flex gap-4">
+        <NavigationMenuItem>
+          <Link href="/">
+            <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+              <h1 className="font-bold">SFHacks24</h1>
+            </NavigationMenuLink>
+          </Link>
+        </NavigationMenuItem>
+        {user != null && (
+          <>
+            <NavigationMenuItem>
+              <Link href="/profile">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Your profile
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+            <NavigationMenuItem>
+              <Link href="/create">
+                <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                  Create new post
+                </NavigationMenuLink>
+              </Link>
+            </NavigationMenuItem>
+          </>
+        )}
+        {user == null ? (
+          <NavigationMenuItem>
+            <Link href="/login">
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                Log in
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        ) : (
+          <NavigationMenuItem>
+            <Link href="/">
+              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                <LogOut />
+              </NavigationMenuLink>
+            </Link>
+          </NavigationMenuItem>
+        )}
+      </NavigationMenuList>
+    </NavigationMenu>
   );
 };
 export default navbar;

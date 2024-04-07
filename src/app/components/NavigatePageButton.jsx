@@ -1,18 +1,20 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 const NavigatePageButton = ({ id }) => {
   const router = useRouter();
 
   return (
-    <button
+    <Button
+      className="h-9"
       onClick={() => {
         router.push(`/${id}`);
       }}
     >
-      See full post
-    </button>
+      View full post
+    </Button>
   );
 };
 

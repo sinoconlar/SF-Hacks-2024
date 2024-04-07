@@ -13,9 +13,7 @@ const EditButton = ({
   const handleClick = async (e) => {
     if (isEditing) {
       setIsEditing(false);
-      console.log(
-        await updatePost(postID, author, title, location, description)
-      );
+      await updatePost(postID, author, title, location, description);
     } else {
       setIsEditing(true);
     }

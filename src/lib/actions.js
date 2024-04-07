@@ -4,6 +4,14 @@ import { createClient } from "./supabase/server";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
+export async function getUser() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  return user;
+}
+
 export async function createPost(title, location, description) {
   const supabase = await createClient();
   const result = await supabase
@@ -88,4 +96,13 @@ export async function getPostsFromUser(id) {
   }
 
   return userPosts;
+}
+
+export async function logOut() {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user) await supabase.auth.signOut();
+  redirect("/");
 }

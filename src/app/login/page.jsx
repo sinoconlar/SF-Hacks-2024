@@ -1,6 +1,7 @@
 "use client";
 
 import { login, signup } from "./actions";
+import { Button } from "@/components/ui/button";
 import React from "react";
 
 const page = () => {
@@ -31,8 +32,10 @@ const page = () => {
         className="text-black"
       />
       <div className="flex gap-4">
-        <button formAction={login}>Log in</button>
-        <button formAction={signup}>Sign up</button>
+        <Button variant="outline" formAction={login}>
+          Log in
+        </Button>
+        <Button formAction={signup}>Sign up</Button>
       </div>
     </form>
   );
